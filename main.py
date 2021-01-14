@@ -25,9 +25,9 @@ banner_rect.x = math.ceil(screen.get_width() / 4)
 banner_rect.y = math.ceil(screen.get_height() / 3)
 
 play_button = pygame.image.load('assets/button.png')
-play_button = pygame.transform.scale(play_button, (200, 150))
+play_button = pygame.transform.scale(play_button, (200, 50))
 play_button_rect = play_button.get_rect()
-play_button_rect.x = math.ceil(screen.get_width() / 3.33)
+play_button_rect.x = math.ceil(screen.get_width() / 2.5)
 play_button_rect.y = math.ceil(screen.get_height() / 2)
 
 
