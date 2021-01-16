@@ -33,8 +33,8 @@ class Player(animation.AnimateSprite):
         bar_color = (111, 210, 46)
         back_bar_color = (60, 63, 60)
 
-        bar_position = [self.rect.x + 50, self.rect.y + 40, self.health, 5]
-        back_bar_position = [self.rect.x + 50, self.rect.y + 40, self.max_health, 5]
+        bar_position = [self.rect.x + 20, self.rect.y + 40, self.health, 5]
+        back_bar_position = [self.rect.x + 20, self.rect.y + 40, self.max_health, 5]
 
         pygame.draw.rect(surface, back_bar_color, back_bar_position)
         pygame.draw.rect(surface, bar_color, bar_position)
@@ -46,6 +46,8 @@ class Player(animation.AnimateSprite):
     def move_right(self):
         if not self.game.check_collision(self, self.game.all_monsters):
             self.rect.x += self.velocity
+            self.load_animation("assets/run", [7,7,7])
 
     def move_left(self):
         self.rect.x -= self.velocity
+

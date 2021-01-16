@@ -33,6 +33,8 @@ class Game:
             projectile.move()
 
         self.player.update_health_bar(screen)
+        if self.player.animation is False:
+            self.player.load_animation("assets/idle", [8,8,8])
         self.player.all_projectiles.draw(screen)
 
         self.player.update_animation()
@@ -57,3 +59,6 @@ class Game:
     def spawn_monster(self):
         monster = Monster(self)
         self.all_monsters.add(monster)
+
+
+
