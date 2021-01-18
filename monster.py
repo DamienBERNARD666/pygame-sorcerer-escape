@@ -5,18 +5,16 @@ import animation
 
 class Monster(animation.AnimateSprite):
 
-    def __init__(self, game):
-        super().__init__("wizard")
+    def __init__(self, game, name, size, offset=0):
+        super().__init__(name, size)
         self.game = game
         self.health = 100
         self.max_health = 100
-        self.attack = 0.5
-        self.image = pygame.image.load('assets/wizard.png')
-        self.image = pygame.transform.scale(self.image, (128, 140))
+        self.attack = 1
         self.rect = self.image.get_rect()
         self.rect.x =  1000 + random.randint(0, 300)
-        self.rect.y = 540
-        self.velocity = random.randint(1, 2)
+        self.rect.y = 540 - offset
+        self.velocity = random.randint(2, 4)
         self.start_animations()
 
     def damage(self, amount):
@@ -45,3 +43,19 @@ class Monster(animation.AnimateSprite):
             self.rect.x -= self.velocity
         else:
             self.game.player.damage(self.attack)
+
+
+class Wizard(Monster):
+
+    def __init__(self, game):
+        super().__init__(game, "wizard", (130, 130))
+
+
+class Wraith(Monster):
+
+    def __init__(self, game):
+        super().__init__(game, "wraith", (300, 300), 190)
+        self.health = 250
+        self.max_health = 250
+        self.attack = 10
+

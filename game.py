@@ -1,6 +1,9 @@
 import pygame
 from player import Player
-from monster import Monster
+from monster import Wizard
+from monster import Wraith
+from sounds import SoundManager
+
 
 class Game:
 
@@ -10,19 +13,23 @@ class Game:
         self.player = Player(self)
         self.all_players.add(self.player)
         self.all_monsters = pygame.sprite.Group()
+        self.sound_manager = SoundManager()
         self.pressed = {}
         self.score = 0
 
     def start(self):
         self.is_playing = True
-        self.spawn_monster()
-        self.spawn_monster()
+        self.spawn_monster(Wizard)
+        self.spawn_monster(Wizard)
+        self.spawn_monster(Wraith)
+        self.sound_manager.play('start')
 
     def game_over(self):
         self.all_monsters = pygame.sprite.Group()
         self.player.health = self.player.max_health
         self.is_playing = False
         self.score = 0
+        self.sound_manager.play('game_over')
 
 
     def launch_game(self, screen):
@@ -56,9 +63,8 @@ class Game:
     def check_collision(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
-    def spawn_monster(self):
-        monster = Monster(self)
-        self.all_monsters.add(monster)
+    def spawn_monster(self, monster_name):
+        self.all_monsters.add(monster_name.__call__(self))
 
 
 

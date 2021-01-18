@@ -3,9 +3,11 @@ import pygame
 
 class AnimateSprite(pygame.sprite.Sprite):
 
-    def __init__(self, sprite_name):
+    def __init__(self, sprite_name, size=(142,200)):
         super().__init__()
+        self.size = size
         self.image = pygame.image.load(f'assets/{sprite_name}.png')
+        self.image = pygame.transform.scale(self.image, size)
         self.running = False
         self.current_image = 0
         self.images = animations.get(sprite_name)
@@ -24,6 +26,7 @@ class AnimateSprite(pygame.sprite.Sprite):
                 if loop is False:
                     self.animation = False
             self.image = self.images[self.current_image]
+            self.image = pygame.transform.scale(self.image, self.size)
 
     def load_animation(self, path, frame_durations):
         animation_frame_data = []
@@ -41,24 +44,19 @@ class AnimateSprite(pygame.sprite.Sprite):
         self.image = animation_frame_data[self.current_image]
 
 
-
-
-
-
-
 def load_animations_images(sprite_name):
     images = []
     path = f"assets/{sprite_name}/{sprite_name}"
 
-    for num in range(1, 25):
+    for num in range(1, 24):
         image_path = path + str(num) + '.png'
         images.append(pygame.image.load(image_path))
 
     return images
 
 
-
 animations = {
     "wizard": load_animations_images('wizard'),
-    "player": load_animations_images('player')
+    "player": load_animations_images('player'),
+    "wraith": load_animations_images('wraith')
 }

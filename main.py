@@ -1,7 +1,7 @@
 import pygame
 import math
 from game import Game
-
+import game
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -15,7 +15,7 @@ background = pygame.transform.scale(background, (2435, 1027))
 bg_x = 0
 bg_width = background.get_width()
 
-my_font = pygame.font.SysFont("Times New Roman", 18)
+my_font = pygame.font.Font("assets/custom_font.ttf", 25)
 
 
 banner = pygame.image.load('assets/banner.png')
@@ -38,7 +38,7 @@ running = True
 def redraw_window():
     screen.blit(background, (bg_x, -300))  # draws our first bg image
     screen.blit(background, (bg_width, -300))  # draws the seconf bg image
-    score_display = my_font.render('Score: ' + str(game.score), True, (255, 255, 255))
+    score_display = my_font.render('Score: 000' + str(game.score), True, (255, 255, 255))
     screen.blit(score_display, (0, 0))
 
 
@@ -68,6 +68,7 @@ while running:
             game.pressed[event.key] = True
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
+                game.sound_manager.play('shoot')
 
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False

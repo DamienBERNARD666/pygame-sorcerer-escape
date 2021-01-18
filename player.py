@@ -24,6 +24,7 @@ class Player(animation.AnimateSprite):
         if self.health - amount > amount:
             self.health -= amount
             self.game.score -= 10
+            self.game.sound_manager.play('hit')
             if self.game.score <= 0:
                 self.game.score = 0
         else:
